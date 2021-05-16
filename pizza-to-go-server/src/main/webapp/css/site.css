@@ -1,0 +1,208 @@
+@charset "UTF-8";
+
+footer { display: none; }
+
+.mainContainer { 
+  height:100vh; 
+  display: grid; 
+  grid-template-rows: auto 4fr 2fr; 
+  grid-template-columns: 100%; 
+  grid-template-areas:  
+    "login" 
+    "map" 
+    "rating" 
+  ; 
+} 
+
+@media screen and (min-width: 44.001em) { 
+  footer { display: block; }
+  .mainContainer { 
+    grid-template-rows: 50px 600px auto;
+    /*grid-template-columns: 80% 20%; */
+    grid-template-columns: auto minmax(350px, 350px);
+    grid-template-areas:  
+      "login      login" 
+      "map        rating" 
+      "userRating userRating " 
+    ; 
+  } 
+  
+}
+
+
+header {
+	/* padding: 15px; */
+	border-bottom: 1px solid #fff;
+	background-color: #D8D8D8;
+    grid-area: login;
+}
+
+
+article {
+	border-bottom: 2px solid #fff;
+    background: white;
+    grid-area: map;
+}
+
+
+aside {
+	border-bottom: 2px solid #fff;
+    background:#d3cccc;
+    grid-area: rating;
+}
+
+footer {
+	padding: 15px;
+	border-bottom: 2px solid #fff;
+    background: #D8D8D8;
+    grid-area: userRating;
+}
+
+#bewertungsDiv {
+	width: 300px; 
+	background: #F9EECF; 
+	border: 1px dotted black; 
+	text-align: left
+}
+
+#UpdateDiv {
+	width: 300px; 
+	background: #F9EECF; 
+	border: 1px dotted black; 
+	text-align: left
+}
+
+#registration {
+	/* position: absolute; */
+    /* top: 900px; */
+    left: 200px;
+    width: 400px;
+    border-radius: 7px;
+     border: 1.5px solid #000000; 
+     margin: 30px auto;
+    /* background: #ffe6b3; */
+    /* z-index: 1000;     */
+}
+
+#anmeldung {
+	/* position: absolute; */
+    /* top: 900px; */
+    left: 200px;
+    width: 400px;
+    margin: 30px auto;
+    border-radius: 7px;
+     border: 1.5px solid #000000; 
+    /* background: #ffe6b3; */
+    /* z-index: 1000;     */
+}
+
+
+
+
+
+.header {
+	overflow: hidden;
+	background-color: #f1f1f1;
+	padding-right: 30px ;
+  }
+  
+  .header a {
+	float: left;
+	color: black;
+	text-align: center;
+	padding: 12px;
+	text-decoration: none;
+	font-size: 18px; 
+	line-height: 25px;
+	border-radius: 4px;
+  }
+  
+  .header a.logo {
+	font-size: 25px;
+	font-weight: bold;
+  }
+  
+  .header a:hover {
+	background-color: #ddd;
+	color: black;
+  }
+  
+  .header a.active {
+	background-color: dodgerblue;
+	color: white;
+  }
+  
+  .header-right {
+	float: right;
+  }
+  
+
+
+
+  
+.app-title {
+  text-align: center;
+  font-weight: normal;
+  font-size: 2.6rem;
+}
+
+.animal {
+  max-width: 650px;
+  /* padding: 20px; */
+  margin: 15px auto;
+  border-radius: 8px;
+  background-color: rgb(240, 240, 240);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.animal h4 {
+  margin: 0 0 6px 0;
+}
+
+.pet-photo {
+  float: left;
+  width: 40%;
+  margin-right: 15px;
+  margin-left: 0px;
+  padding-left: 0 px;
+  width: 150px; 
+  height: 150px
+
+
+}
+
+.pet-name {
+  font-size: 2rem;
+  font-weight: normal;
+  margin: 0 0 1rem 0;
+}
+
+.species {
+  font-size: 0.9rem;
+  color: #888;
+  vertical-align: middle;
+}
+
+.foods-list {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  left: 17px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+
+
+.hinzufuegen{
+ width: 100px; 
+ height: 30px; 
+ float: right; 
+ margin-right: 10px; 
+ background-color: dodgerblue; 
+ color: white;   
+ border: 1.5px solid dodgerblue;   
+ text-decoration: none; 
+ border-radius: 4px;
+}

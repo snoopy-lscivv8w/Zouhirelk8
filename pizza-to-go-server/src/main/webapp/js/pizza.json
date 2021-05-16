@@ -1,0 +1,26 @@
+[
+    {
+        "imagePath": "https://static.essen-und-trinken.de/bilder/6b/3f/58617/facebook_image/klassischer-burger.jpg",
+        "name": "Classic Burger",
+        "description": "with beef, cheese, onion, tomato, with beef, cheese, onion, tomato, with beef, cheese, onion, tomato",
+        "price": 5.5
+    },
+    {
+        "imagePath": "https://img.delicious.com.au/0Hfc6oZG/w1200/del/2017/03/creamy-pumpkin-soup-43936-2.jpg",
+        "name": "Pumpkin Soup",
+        "description": "with pumpkins, Lorem ipsum dolor sit amet, consetetur sadipscing",
+        "price": 0.75
+    },
+    {
+        "imagePath": "https://cdn.gutekueche.de/upload/rezept/141/1600x1200_pommes-frites-aus-belgien.jpg",
+        "name": "Pommes",
+        "description": "with ketchup",
+        "price": 3
+    },
+    {
+        "imagePath": "https://cdn.gutekueche.de/upload/rezept/141/1600x1200_pommes-frites-aus-belgien.jpg",
+        "name": "Pommes",
+        "description": "with ketchup",
+        "price": 3
+    }
+]
