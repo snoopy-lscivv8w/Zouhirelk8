@@ -2,46 +2,9 @@
 
 window.onload = function () {
 
-
-
-	var array = [];
-	array.push({
-		id: "1",
-		action: "shout"
-	});
-
-	array.push({
-		id: "2",
-		action: "dddd"
-	});
-	console.log(array[0]);
-	// console.log(myJSONString);
-	array[0].id = "3";
-	console.log(array);
-	// console.log(array[1]);
-	// console.log(myJSONString[1]);
-
-
-	// var myObj = [  
-	// 	  {"name":"BMW", "models":"320"},
-	// 	  {"name":"Fiat", "models":"Panda" }
-
-	// ];
-
-	// var obj = JSON.parse(jsonStr);
-	// obj.push({"teamId":"4","status":"pending"});
-	// obj.push({"teamId":"5","status":"pending"});
-	// jsonStr = JSON.stringify(obj);
-	// console.log(myObj[1].name);
-	// console.log(jsonStr.theTeam[1].teamId);
-
+	warenkorb();
 	petTemplate(pizza);
-
-
-
-
-
-
+	summe();
 
 
 	// fetch('pizza.json').then(response => {
@@ -52,13 +15,6 @@ window.onload = function () {
 	//   }).catch((error) => console.error(error));
 
 
-	// document.querySelector("#kneipe_inf").style.display = "none";
-	// document.querySelector("#update").style.display = "none";
-	// changeVisibility();
-
-
-
-
 
 	var input = document.querySelector("#pwd");
 	input.addEventListener("keyup",
@@ -67,10 +23,6 @@ window.onload = function () {
 			checkPassword(passwd);
 		},
 		false);
-
-	// getMapPois(mymap);
-
-
 
 }
 
@@ -466,57 +418,61 @@ function petTemplate(pizza) {
 
 	var pizzaList = "";
 	pizza.forEach(com => {
-		pizzaList += '<div class="animal"><img class="pet-photo" src="' + com.imagePath + '"> <h2 class="pet-name">' + com.name + ' </h2>  <p> ' + com.description + '</p>  <p><strong>Preis:  </strong>' + com.price + '<button type="button" class="hinzufuegen" id="hinzufuegen" onclick="hinzufuegen(' + com.id + ')" style="width: 100px; height: 30px; float: right; margin-right: 10px; background-color: dodgerblue; color: white;   border: 1.5px solid dodgerblue;   text-decoration: none; border-radius: 4px;">Hinzufügen</button>  <a id="mehrInfo" onclick="showInfos(' + com.id + ')" style="float: right; padding-right:10px">Mehr Infos</a> </p></div >';
+		pizzaList += '<div class="animal"><img class="pet-photo" src="'
+			+ com.imagePath + '"> <h2 class="pet-name">' + com.name + ' </h2>  <p id="description2"> '
+			+ com.description + '</p>  <p><span id="price"><strong >Preis:  </strong>'
+			+ com.price + ' €</span><span id="preis3"><a id="mehrInfo" onclick="showInfos('
+			+ com.id + ')">Mehr Infos <i class="fas fa-info-circle"></i></a><button type="button" class="hinzufuegen" id="hinzufuegen" onclick="hinzufuegen('
+			+ com.id + ')" ><i class="fas fa-cart-plus"></i></button>  </span> </p></div >';
 	});
 	document.querySelector("#app").innerHTML = pizzaList;
-
-
 
 }
 
 var array = [];
-
-
+var w = 0;
 
 function hinzufuegen(id) {
-
-	var warenkorb = "";
+	w++;
+	warenkorb();
+	var a = 1;
 	pizza.forEach(com => {
 
 		if (id == com.id) {
 
 			array.push({
-				id: com.id,
-				action: com.name
+				pizza_id: com.id,
+				pizza_name: com.name,
+				Pizza_image: com.imagePath,
+				Pizza_preis: com.price,
+				Pizza_summe : com.price*a,
+				Pizza_description: com.description,
+				Pizza_anzahl: a
 
 			});
 
-			array.forEach(com => {
-
-				warenkorb += '<div class="animal"  style="margin : 15px"> <h2 class="pet-name">' + com.id + ' </h2>  <p> ' + com.action + '</p>   <button type="button" class="hinzufuegen" id="hinzufuegen" onclick="löschen(' + com.id + ')">löschen</button></div >';
-			});
+			summe();
 
 		}
-		document.querySelector("#warenkorb").innerHTML = warenkorb;
-		
+		document.querySelector("#warenkorb").innerHTML = showWarenkorb(array);
+
+
 	});
 
 }
 
+
 function löschen(id) {
 
-
-	var warenkorb = "";
+	w--;
+	warenkorb();
 	array.forEach(com => {
 
-		if (id == com.id) delete array[array.indexOf(com)];
+		if (id == com.pizza_id) { delete array[array.indexOf(com)]; summe(); }
 	});
 	console.log(array);
-	array.forEach(com => {
 
-		warenkorb += '<div class="animal"  style="margin : 15px"> <h2 class="pet-name">' + com.id + ' </h2>  <p> ' + com.action + '</p>   <button type="button" class="hinzufuegen" id="hinzufuegen" onclick="löschen(' + com.id + ')">löschen</button></div >';
-	});
-	document.querySelector("#warenkorb").innerHTML = warenkorb;
+	document.querySelector("#warenkorb").innerHTML = showWarenkorb(array);;
 
 }
 
@@ -530,7 +486,13 @@ function showInfos(id) {
 		if (id == com.id) {
 			document.querySelector("#showinfo").innerHTML =
 
-				'<div class="animal"  style="margin : 15px"> <h2 class="pet-name">' + com.id + ' </h2>  <p> ' + com.name + '</p><button type="button" class="hinzufuegen" id="hinzufuegen" onclick="hinzufuegen(' + com.id + ')" 	>Hinzufügen</button><a id="mehrInfo" onclick="hideInfos()" style="float: right; padding-right:10px">Zurück</a>  </div >';
+				'<div class="mehrinfos"  style="margin : 15px"> <table><tr><td rowspan="2" id="td_img">'
+				+ '<img class="photo" src="'
+				+ com.imagePath + '"></td><td style="vertical-align: top;text-align: left; "><p class="name"> '
+				+ com.name + '</p></td> </tr><tr><td style="vertical-align: top;text-align: left; padding-left:10px"><strong >Preis:  </strong> ' + com.price + ' €</td></tr><tr><td colspan="2"><p> '
+				+ com.description + '</p></td></tr></table>'
+				+ ' <span id="info_zurück"><a id="hideinfo" onclick="hideInfos()"><i class="fas fa-hand-point-left"></i> Zurück</a><button type="button" class="hinzufuegen" id="hinzufuegen" onclick="hinzufuegen('
+				+ com.id + ')" ><i class="fas fa-cart-plus"></i></button>  </span></div >';
 
 		}
 
@@ -539,8 +501,93 @@ function showInfos(id) {
 
 }
 
+function showWarenkorb(array) {
+	var warenkorb = "";
+	array.forEach(com => {
+
+		warenkorb += '<div class="showWarenkorb"> <h4 class="name">'
+			+ com.pizza_name + ' </h4><h4 class="anzahl"> '
+			+ '<button type="button" class="minus"onclick="minus(' + com.pizza_id + ')"><i class="fas fa-minus">'
+			+ '</i></button> <input type="text" id="anzahl_input" style="width: 30px; height: 30px;"  disabled /> '
+			+ '<button type="button" class="plus" onclick="plus(' + com.pizza_id + ')"><i class="fas fa-plus"></i></button><span id="preis">Preis '
+			+ '</span></h4> <span id="preis3"><span id="preis2">' + com.Pizza_summe*com.Pizza_anzahl
+			+ ' €</span> <button type="button" class="löschen" id="löschen" onclick="löschen('
+			+ com.pizza_id + ')"><i class="far fa-trash-alt"></i></button></span></div >';
+	});
+
+	return warenkorb;
+}
+
+
+
 function hideInfos() {
-	// petTemplate(pizza);
+
 	document.querySelector("#app").style.display = "block";
 	document.querySelector("#showinfo").style.display = "none";
+
+}
+
+function warenkorb() {
+	document.querySelector(".active").innerHTML = '<i class="fas fa-cart-plus"></i><sup id="sup">' + w + '</sup>';
+
+}
+
+function summe() {
+
+	var s = 0;
+	if (array.length == 0) s = 0;
+	else {
+		array.forEach(element => {
+
+			s += (element.Pizza_summe);
+		});
+
+	}
+	
+	document.querySelector("#summe_preis").innerHTML = s + ' €';
+}
+
+function plus(id) {
+
+	array.forEach(element => {
+
+		if (id == element.pizza_id) {
+			element.Pizza_anzahl++;
+			element.Pizza_summe= element.Pizza_preis*element.Pizza_anzahl;
+			console.log(element.Pizza_summe );
+			document.querySelector("#preis2").value = element.Pizza_summe;
+			document.querySelector("#anzahl_input").value = element.Pizza_anzahl;
+			summe();
+			showWarenkorb(array);
+		}
+
+
+	});
+
+
+}
+function minus(id) {
+
+	array.forEach(element => {
+
+		if (id == element.pizza_id) {
+			if(element.Pizza_anzahl!=1){
+				element.Pizza_anzahl--;
+			element.Pizza_summe= element.Pizza_preis*element.Pizza_anzahl;
+			console.log(element.Pizza_summe );
+			
+			document.querySelector("#preis2").innerHTML = element.Pizza_summe;
+			document.querySelector("#anzahl_input").value = element.Pizza_anzahl;
+			summe();
+			showWarenkorb(array);
+
+
+		}}
+
+
+	});
+
+	
+
+
 }
